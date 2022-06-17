@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -6,10 +6,10 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -43,11 +43,11 @@ function App() {
   <Footer />
 
   <PopupWithForm
-    title={"Редактировать профиль"}
+    title="Редактировать профиль"
     onClose={closeAllPopups}
     isOpen={isEditProfilePopupOpen}
     name={"profile"}
-    buttonText={"Сохранить"}
+    buttonText="Сохранить"
   >
     <input
       type="text"
@@ -80,11 +80,11 @@ function App() {
   </PopupWithForm>
 
   <PopupWithForm
-    title={"Новое место"}
+    title="Новое место"
     onClose={closeAllPopups}
     isOpen={isAddPlacePopupOpen}
     name={"edit_card"}
-    buttonText={"Создать"}
+    buttonText="Создать"
   >
     <input
         type="text"
@@ -117,11 +117,11 @@ function App() {
   <PopupWithForm title={"Вы уверены?"} name={"edit_confirm"} buttonText={"Да"} />
 
   <PopupWithForm
-    title={"Обновить аватар"}
+    title="Обновить аватар"
     onClose={closeAllPopups}
     isOpen={isEditAvatarPopupOpen}
     name={"avatar"}
-    buttonText={"Сохранить"}
+    buttonText="Сохранить"
   >
     <input
         type="url"
