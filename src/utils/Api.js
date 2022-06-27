@@ -28,35 +28,35 @@ class Api {
    }
  
  
-   editProfile(userData) {
+   editProfile(name, about) {
       return fetch(`${this._baseUrl}/users/me`, {
          method: "PATCH",
          headers: this._headers,
          body: JSON.stringify({
-           name: userData.name,
-           about: userData.about,
+           name,
+           about,
          })
       })
          .then(this._checkRequest)
    }
  
-   editAvatar(data) {
+   editAvatar({avatar}) {
       return fetch(`${this._baseUrl}/users/me/avatar`, {
          method: "PATCH",
          headers: this._headers,
          body: JSON.stringify({
-           avatar: data.link
+           avatar
          }),
       }).then(this._checkRequest)
    }
  
-   addUserCard(data) {
+   addUserCard(name, link) {
       return fetch(`${this._baseUrl}/cards`, {
          method: "POST",
          headers: this._headers,
          body: JSON.stringify({
-           name: data.name,
-           link: data.link,
+           name,
+           link
          }),
        }).then(this._checkRequest);
      }
