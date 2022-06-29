@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card({ card, onCardClick, onCardLike, onConfirmDelete }) {
-    const currentUser = React.useContext(CurrentUserContext);
+    const currentUser = useContext(CurrentUserContext);
     const isOwn = card.owner._id === currentUser._id;
     const cardDeleteButtonClassName = (
        `element__delete ${isOwn ? '' : 'element__delete_hidden'}`
@@ -25,8 +25,6 @@ function Card({ card, onCardClick, onCardLike, onConfirmDelete }) {
         onConfirmDelete(card);
      }
   
-
-
    return (
     <article className="element">
         <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>

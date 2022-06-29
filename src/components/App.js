@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -11,17 +11,17 @@ import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
-  const [cardSelectedForDelete, setCardSelectedForDelete] = React.useState({});
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+  const [cardSelectedForDelete, setCardSelectedForDelete] = useState({});
 
-  React.useEffect(() => {
+ useEffect(() => {
     Promise.all([api.getProfile(), api.getInitialCards()])
         .then(([item, cardsData]) => {
             const data= {
@@ -35,8 +35,6 @@ function App() {
         })
         .catch((err) => console.log(err))
 }, [])
-
-
 
 function handleConfirmDeleteClick(card) {
     setCardSelectedForDelete(card);
@@ -124,7 +122,6 @@ const handleCardLike = (card) => {
         .catch((err) => console.log(`Ошибка ${err}`));
 };
 
-
 const handleCardDelete = (card) => {
     setIsLoading(true);
     api.deleteCard(card._id)
@@ -138,14 +135,13 @@ const handleCardDelete = (card) => {
         })
 };
 
-React.useEffect(() => {
+useEffect(() => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeAllPopups();
         }
     });
 }, []);
-
 
   return (
     <div className="root">
